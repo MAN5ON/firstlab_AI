@@ -1,13 +1,15 @@
-from collections import OrderedDict, Counter, defaultdict
+from collections import OrderedDict
 
 n = int(input('How Many N?:'))
-order = OrderedDict(input('key and value: ').split() for _ in range(n))
-order1 = defaultdict(int)
+order = OrderedDict()
 
-for key, value in order.items():
-    order1[key] += int(value)
+for i in range(n):
+    name, price = input('Product name and volume separate by a space:').rsplit(' ', 1)
+    price = int(price)
 
-c = Counter(order1)
-for d in order1:
-    c.update(d)
-print(c)
+    if name in order:
+        order[name] += price
+    else:
+        order[name] = price
+
+print('\n'.join(f"{key} {value}" for key, value in order.items()))
